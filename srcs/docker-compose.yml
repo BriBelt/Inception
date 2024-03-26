@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+	nginx:
+		container_name:
+		build: ./srcs/nginx
+		env_file:
+			- .env
+		restart:
+		ports:
+	mariadb:
+		container_name:
+		build: ./srcs/mariadb
+		env_file:
+			- .env
+		restart:
+		depends_on:
+			- nginx
+	wordpress:
+		container_name:
+		build: ./srcs/wordpress
+		env_file:
+			- .env
+		restart:
+		depends_on:
+			- nginx
+			- mariadb
+
+# Same as the docker network create <name> command, allows containers to communicate
+# with each other and with the external world.
+# Docker compose actually sets up a single network for your app by default.
+networks:
+	inception:
+		name: inception_ntw
