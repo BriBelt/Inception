@@ -1,5 +1,5 @@
 FROM debian:bullseye
 
-RUN apt update && apt install mariadb-server -y
+RUN apt-get update && apt-get install -y mariadb-server
 
-#CMD while true
+CMD mysqld_safe

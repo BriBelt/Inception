@@ -2,29 +2,38 @@ version: '3'
 
 services:
 	nginx:
-		container_name:
+		container_name: nginx
 		build: ./srcs/nginx
 		env_file:
 			- .env
-		restart:
+		restart: on-failure
 		ports:
+            - 443:443
 	mariadb:
-		container_name:
+		container_name: mariadb
 		build: ./srcs/mariadb
 		env_file:
 			- .env
-		restart:
-		depends_on:
-			- nginx
+		restart: on-failure
+        volumes:
+            - mariadb-volume:/var/lib/mysql
 	wordpress:
-		container_name:
+        container_name: wordpress
 		build: ./srcs/wordpress
 		env_file:
 			- .env
-		restart:
+		restart: on-failure
 		depends_on:
-			- nginx
 			- mariadb
+        volumes:
+            - wordpress-volume:
+
+volumes:
+    mariadb-volume:
+        # Indicates Docker that it should create the volume's path locally.
+        driver: local
+    wordpress-volume:
+        driver: local
 
 # Same as the docker network create <name> command, allows containers to communicate
 # with each other and with the external world.
