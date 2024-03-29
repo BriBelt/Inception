@@ -1,16 +1,40 @@
 server 
 {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    
+
+# Sets the address and port or path for a UNIX-domain socket on which the server will
+# accept requests.
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+
+# Sets the name of a virtual server
+    server_name ${DOMAIN_NAME};
+
+# Suggested settings from Cipherlist.eu for strong security in NGINX
 	ssl_protocols TLSv1.2 TLSv1.3;
+	ssl_prefer_server_ciphers on;
+	ssl_dhparam /etc/nginx/dhparam.pem; 
+	ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
+	ssl_ecdh_curve secp384r1;
+	ssl_session_timeout  10m;
+	ssl_session_cache shared:SSL:10m;
+	ssl_session_tickets off;
+	ssl_stapling on;
+	ssl_stapling_verify on;
+
+# Assigning the previously (Dockerfile) created key and certificate to our configuration.
 	ssl_certificate /etc/ssl/certs/rootCert.crt;
 	ssl_certificate_key /etc/ssl/private/rootKey.key;
-    root /usr/share/nginx/html;
-    index index.html index.htm;
 
-    server_name _;
+	add_header X-Frame-Options DENY;
+	add_header X-Content-Type-Options nosniff;
+	add_header X-XSS-Protection "1; mode=block";    
+    root /var/www/html/;
+
+    index index.html index.htm;
     location / {
+		root /var/www/nginx;
+		index index.html index.htm
         try_files $uri $uri/ =404;
     }
 }

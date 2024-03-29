@@ -1,43 +1,42 @@
 version: '3'
 
 services:
-	nginx:
-		container_name: nginx
-		build: ./srcs/nginx
-		env_file:
-			- .env
-		restart: on-failure
-		ports:
+    nginx:
+        container_name: nginx
+        build: ./nginx
+        env_file:
+            - ./.env
+        restart: on-failure
+        ports: 
             - 443:443
-	mariadb:
-		container_name: mariadb
-		build: ./srcs/mariadb
-		env_file:
-			- .env
-		restart: on-failure
-        volumes:
-            - mariadb-volume:/var/lib/mysql
-	wordpress:
+    mariadb:
+        container_name: mariadb
+        build: ./mariadb
+        env_file:
+            - ./.env
+        restart: on-failure
+        #volumes:
+        #- mariadb-volume:/var/lib/mysql
+    wordpress:
         container_name: wordpress
-		build: ./srcs/wordpress
-		env_file:
-			- .env
-		restart: on-failure
-		depends_on:
-			- mariadb
-        volumes:
-            - wordpress-volume:
+        build: ./wordpress
+        env_file:
+            - ./.env
+        restart: on-failure
+        depends_on:
+            - mariadb
+              #volumes:
+              #- wordpress-volume:
 
-volumes:
-    mariadb-volume:
+                #volumes:
+                #mariadb-volume:
         # Indicates Docker that it should create the volume's path locally.
-        driver: local
-    wordpress-volume:
-        driver: local
-
+        #driver: local
+        #wordpress-volume:
+        #driver: local
 # Same as the docker network create <name> command, allows containers to communicate
 # with each other and with the external world.
 # Docker compose actually sets up a single network for your app by default.
 networks:
-	inception:
-		name: inception_ntw
+    inception:
+        name: inception_ntw
