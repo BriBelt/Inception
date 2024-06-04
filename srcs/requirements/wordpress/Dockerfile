@@ -3,7 +3,7 @@ FROM debian:bullseye
 # Installing all the necessary packages: PHP,
 # and other utilities.
 RUN apt update && apt install -y php \
-	php-fpm php-curl php-gd php-intl \
+	php-mysql php-fpm php-curl php-gd php-intl \
 	php-mbstring php-soap php-xml \
 	php-xmlrpc php-zip wget unzip && apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
