@@ -12,11 +12,11 @@ RUN apt update && apt install -y php \
 # Here we are getting WP-CLI which will help us with with the use
 # of commands in order to make modifications to the web without
 # the need of accessing it directly through the web.
-RUN -q -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+RUN wget -q -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
     chmod +x /usr/local/bin/wp
 
 RUN wget https://wordpress.org/latest.tar.gz && \
-    tar -xzf latest.tar.gz && \
+    tar -xzf latest.tar.gz && mkdir /var/www/html && \
     mv wordpress/* /var/www/html/ && \
     rm -rf latest.tar.gz wordpress
 

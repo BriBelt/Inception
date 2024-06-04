@@ -37,6 +37,6 @@ services:
 # Same as the docker network create <name> command, allows containers to communicate
 # with each other and with the external world.
 # Docker compose actually sets up a single network for your app by default.
-networks:
-    inception:
-        name: inception_ntw
+#networks:
+#    inception:
+#        name: inception_ntw
