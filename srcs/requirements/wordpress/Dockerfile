@@ -4,7 +4,7 @@ FROM debian:bullseye
 # and other utilities.
 RUN apt update && apt install -y php \
 	php-mysql php-fpm php-curl php-gd php-intl \
-	php-mbstring php-soap php-xml php-fpm \
+	php-mbstring php-soap php-xml \
 	php-xmlrpc php-zip wget unzip && apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -17,7 +17,7 @@ RUN wget -q -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds
 
 RUN wget https://wordpress.org/latest.tar.gz && \
     tar -xzf latest.tar.gz && \
-    mkdir -p /var/www/html && \
+    mkdir -p /var/www/html/ && \
     mv wordpress/* /var/www/html/ && \
     rm -rf latest.tar.gz wordpress
 
