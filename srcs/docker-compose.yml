@@ -9,14 +9,16 @@ services:
         restart: on-failure
         ports: 
             - 443:443
-        networks: inception 
+        networks: 
+            - inception 
     mariadb:
         container_name: mariadb
         build: ./requirements/mariadb
         env_file:
             - ./.env
         restart: on-failure
-        networks: inception 
+        networks: 
+            - inception 
         #volumes:
         #- mariadb-volume:/var/lib/mysql
     wordpress:
@@ -29,7 +31,8 @@ services:
             - 8000 
         depends_on:
             - mariadb
-        networks: inception 
+        networks: 
+            - inception 
               #volumes:
               #- wordpress-volume:
 
