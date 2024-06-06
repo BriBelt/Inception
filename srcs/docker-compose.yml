@@ -23,7 +23,7 @@ services:
         env_file:
             - ./.env
         restart: on-failure
-	ports:
+        ports: 
             - 80:80
         depends_on:
             - mariadb
