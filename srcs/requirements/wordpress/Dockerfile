@@ -11,12 +11,14 @@ RUN apt update && apt install -y php \
 RUN wget https://wordpress.org/latest.tar.gz && \
     tar -xzf latest.tar.gz && \
     mkdir -p /var/www/html/ && \
+    mkdir -p /run/php/ && \
     mv wordpress/* /var/www/html/ && \
     rm -rf latest.tar.gz wordpress
 
 # Set the correct permissions
 RUN chown -R www-data:www-data /var/www/html && \
-    chmod -R 755 /var/www/html
+    chmod -R 755 /var/www/html && \
+    chmod -R 755 /run/php
 
 # Use wget to download from the internet 
 # Here we are getting WP-CLI which will help us with with the use
