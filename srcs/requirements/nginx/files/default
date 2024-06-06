@@ -11,13 +11,9 @@ server
     server_name localhost;
 
 # Assigning the previously (Dockerfile) created key and certificate to our configuration.
-	ssl_protocols TLSv1.2 TLSv1.3;
-	ssl_certificate /etc/ssl/certs/rootCert.crt;
-	ssl_certificate_key /etc/ssl/private/rootKey.key;
-
-	add_header X-Frame-Options DENY;
-	add_header X-Content-Type-Options nosniff;
-	add_header X-XSS-Protection "1; mode=block";
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_certificate /etc/ssl/certs/rootCert.crt;
+    ssl_certificate_key /etc/ssl/private/rootKey.key;
 
     root /var/www/html/;
     index index.php index.html index.htm index.nginx-debian.html;
