@@ -41,4 +41,4 @@ services:
 # Docker compose actually sets up a single network for your app by default.
 networks:
     inception:
-        name: inception_ntw
+    #    name: inception_ntw
