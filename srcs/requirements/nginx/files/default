@@ -20,20 +20,22 @@ server
 	add_header X-XSS-Protection "1; mode=block";
 
     root /var/www/html/;
-    index index.php index.html index.htm;
+    index index.php index.html index.htm index.nginx-debian.html;
 
     location / {
-    		try_files $uri $uri/ /index.php?$args;
+    	try_files $uri $uri/ /index.php?$args;
 	}
+
     location ~ \.php$ {
-        	include fastcgi_params;
-		include snippets/fastcgi-php.conf;
-       		fastcgi_pass wordpress:9000;
-        	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-		fastcgi_param PATH_INFO $fastcgi_path_info;
-		}
+        include fastcgi_params;
+	include snippets/fastcgi-php.conf;
+       	fastcgi_pass wordpress:9000;
+       	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	fastcgi_param PATH_INFO $fastcgi_path_info;
+	}
+
     location ~ /\.ht {
-    		deny all;
+    	deny all;
 	}
 
 }
