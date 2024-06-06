@@ -11,7 +11,7 @@ RUN apt update && apt install -y php \
 RUN wget https://wordpress.org/latest.tar.gz && \
     tar -xzf latest.tar.gz && \
     mkdir -p /var/www/html/ && \
-   # mkdir -p /run/php/php/ && \
+    mkdir -p /run/php/php/ && \
     mv wordpress/* /var/www/html/ && \
     rm -rf latest.tar.gz wordpress
 
