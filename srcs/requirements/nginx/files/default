@@ -8,7 +8,7 @@ server
     listen [::]:443 ssl;
 
 # Sets the name of a virtual server
-    server_name ${DOMAIN_NAME};
+    server_name bbeltran.42.fr;
 
 # Assigning the previously (Dockerfile) created key and certificate to our configuration.
 	ssl_protocols TLSv1.2 TLSv1.3;
