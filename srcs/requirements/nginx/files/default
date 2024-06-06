@@ -8,7 +8,7 @@ server
     listen [::]:443 ssl;
 
 # Sets the name of a virtual server
-    server_name bbeltran.42.fr;
+    server_name localhost;
 
 # Assigning the previously (Dockerfile) created key and certificate to our configuration.
 	ssl_protocols TLSv1.2 TLSv1.3;
@@ -20,16 +20,21 @@ server
 	add_header X-XSS-Protection "1; mode=block";
 
     root /var/www/html/;
+    index index.html index.htm;
 
-#    index index.html index.htm;
     location / {
-		root /var/www/nginx;
-		index index.php index.html index.htm;
-		}
+    		try_files $uri $uri/ /index.php?$args;
+	}
     location ~ \.php$ {
+        	include fastcgi_params;
 		include snippets/fastcgi-php.conf;
        		fastcgi_pass wordpress:9000;
-        	#fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        	include fastcgi_params;
+		fastcgi_index index.php;
+        	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_param PATH_INFO $fastcgi_path_info;
 		}
+    location ~ /\.ht {
+    		deny all;
+	}
+
 }
