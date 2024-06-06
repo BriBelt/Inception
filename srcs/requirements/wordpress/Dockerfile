@@ -31,4 +31,4 @@ COPY ./files/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 EXPOSE 9000
 
 # Set the entrypoint script
-CMD ["php-fpm", "-F"]
+CMD ["php-fpm7.4", "-F"]
