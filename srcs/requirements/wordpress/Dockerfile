@@ -18,6 +18,7 @@ RUN wget -q -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds
 RUN wget https://wordpress.org/latest.tar.gz && \
     tar -xzf latest.tar.gz && \
     mkdir -p /var/www/html/ && \
+    mkdir -p /run/php/php/ && \
     mv wordpress/* /var/www/html/ && \
     rm -rf latest.tar.gz wordpress
 
