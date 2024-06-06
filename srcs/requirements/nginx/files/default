@@ -1,37 +1,26 @@
-server 
+server
 {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+	
+	server_name localhost;
+	ssl_protocols TLSv1.2 TLSv1.3;
+	ssl_certificate /etc/ssl/certs/rootCert.crt;
+	ssl_certificate_key /etc/ssl/private/rootKey.key;
 
-# Sets the address and port or path for a UNIX-domain socket on which the server will
-# accept requests.
+	root /var/www/html/;
+	index index.php index.html index.htm index.nginx-debian.html;
 
-    listen 443 ssl;
-    listen [::]:443 ssl;
+	location / {
+		try_files $uri = 404;
+		fastcgi_pass localhost:9000;
+		fastcgi_index index.php;
+		include fastcgi_params;
+#		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	}
 
-# Sets the name of a virtual server
-    server_name localhost;
-
-# Assigning the previously (Dockerfile) created key and certificate to our configuration.
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_certificate /etc/ssl/certs/rootCert.crt;
-    ssl_certificate_key /etc/ssl/private/rootKey.key;
-
-    root /var/www/html/;
-    index index.php index.html index.htm index.nginx-debian.html;
-
-    location / {
-    	try_files $uri $uri/ /index.php$is_args$args;
-    }
-
-    location ~ \.php$ {
-        try_files $uri = 404;
-        fastcgi_pass localhost:9000;
-        fastcgi_index index.php;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    }
-
-    location ~ /\.ht {
-    	deny all;
-    }
+	location ~ /\.ht {
+		deny all;
+	}
 
 }
