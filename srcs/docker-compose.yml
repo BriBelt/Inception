@@ -43,6 +43,7 @@ services:
 
 volumes:
     wordpress-volume:
+    mariadb-volume:
         # Indicates Docker that it should create the volume's path locally.
         #driver: local
         #wordpress-volume:
