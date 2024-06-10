@@ -14,7 +14,7 @@ services:
         depends_on: 
             - wordpress 
         volumes:
-        - wordpress-volume:/var/www/html
+            - wordpress-volume:/var/www/html
     mariadb:
         container_name: mariadb
         build: ./requirements/mariadb
@@ -38,7 +38,10 @@ services:
         networks: 
             - inception 
         volumes:
-        - wordpress-volume:/var/www/html
+            - wordpress-volume:/var/www/html
+
+    volumes:
+    	wordpress-volume:
         # Indicates Docker that it should create the volume's path locally.
         #driver: local
         #wordpress-volume:
