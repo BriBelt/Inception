@@ -10,7 +10,7 @@ services:
         ports: 
             - 443:443
         networks: 
-            - inception 
+            - inception_ntw 
         depends_on: 
             - wordpress 
         volumes:
@@ -22,7 +22,7 @@ services:
             - ./.env
         restart: on-failure
         networks: 
-            - inception 
+            - inception_ntw 
 #        volumes:
 #        - mariadb-volume:/var/lib/mysql
     wordpress:
@@ -36,9 +36,10 @@ services:
         depends_on:
             - mariadb
         networks: 
-            - inception 
+            - inception_ntw 
         volumes:
             - wordpress-volume:/var/www/html
+	    - ./requirements/wordpress/conf/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
 
 volumes:
     wordpress-volume:
@@ -50,5 +51,5 @@ volumes:
 # with each other and with the external world.
 # Docker compose actually sets up a single network for your app by default.
 networks:
-    inception:
-    #    name: inception_ntw
+    inception_ntw:
+    	driver: bridge
