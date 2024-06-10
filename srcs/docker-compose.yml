@@ -39,7 +39,7 @@ services:
             - inception_ntw 
         volumes:
             - wordpress-volume:/var/www/html
-            - ./requirements/wordpress/conf/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
+            - ./requirements/wordpress/files/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
 
 volumes:
     wordpress-volume:
