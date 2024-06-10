@@ -3,7 +3,7 @@ server
 	listen 443 ssl;
 	listen [::]:443 ssl;
 	
-	server_name localhost;
+	server_name bbeltran.42.fr www.bbeltran.42.fr;
 	ssl_protocols TLSv1.2 TLSv1.3;
 	ssl_certificate /etc/ssl/certs/rootCert.crt;
 	ssl_certificate_key /etc/ssl/private/rootKey.key;
@@ -12,13 +12,13 @@ server
 	index index.php index.html index.htm index.nginx-debian.html;
 
 	location / {
-		try_files $uri $uri/ index.php$is_args$args;
+		try_files $uri $uri/ /index.php$is_args$args;
 	}
 
 	location ~ \.php$ {
-		root html;
+		#root html;
 		try_files $uri = 404;
-		fastcgi_pass localhost:9000;
+		fastcgi_pass wordpress:9000;
 		fastcgi_index index.php;
 		fastcgi_param SCRIPT_FILENAME /scripts$fastcgi_script_name;
 		include fastcgi_params;
