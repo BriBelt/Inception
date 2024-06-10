@@ -24,4 +24,6 @@ COPY files/default /etc/nginx/conf.d/
 # Substitute the environment variables for the correct ones.
 RUN envsubst < /etc/nginx/conf.d/default > /etc/nginx/conf.d/default.conf
 
+EXPOSE 443
+
 CMD ["nginx", "-g", "daemon off;"] 

@@ -6,7 +6,6 @@ services:
         build: ./requirements/nginx
         env_file:
             - ./.env
-        restart: on-failure
         ports: 
             - 443:443
         networks: 
@@ -15,14 +14,15 @@ services:
             - wordpress 
         volumes:
             - wordpress-volume:/var/www/html
+        restart: on-failure
     mariadb:
         container_name: mariadb
         build: ./requirements/mariadb
         env_file:
             - ./.env
-        restart: on-failure
         networks: 
             - inception_ntw 
+        restart: on-failure
 #        volumes:
 #        - mariadb-volume:/var/lib/mysql
     wordpress:
@@ -50,6 +50,7 @@ volumes:
 # Same as the docker network create <name> command, allows containers to communicate
 # with each other and with the external world.
 # Docker compose actually sets up a single network for your app by default.
+
 networks:
     inception_ntw:
     	driver: bridge
