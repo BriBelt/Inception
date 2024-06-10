@@ -8,10 +8,13 @@ server
 	ssl_certificate /etc/ssl/certs/rootCert.crt;
 	ssl_certificate_key /etc/ssl/private/rootKey.key;
 
-	root /var/www/html/;
-	index index.php index.html index.htm index.nginx-debian.html;
+	location / {
+		root /var/www/html/;
+		index index.php index.html index.htm index.nginx-debian.html;
+	}
 
 	location / {
+		root html;
 		try_files $uri = 404;
 		fastcgi_pass localhost:9000;
 		fastcgi_index index.php;
