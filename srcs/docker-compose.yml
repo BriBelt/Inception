@@ -23,8 +23,8 @@ services:
         restart: on-failure
         networks: 
             - inception 
-        volumes:
-        - mariadb-volume:/var/lib/mysql
+#        volumes:
+#        - mariadb-volume:/var/lib/mysql
     wordpress:
         container_name: wordpress
         build: ./requirements/wordpress
