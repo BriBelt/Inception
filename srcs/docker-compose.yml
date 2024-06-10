@@ -53,4 +53,3 @@ volumes:
 
 networks:
     inception_ntw:
-    	driver: bridge
