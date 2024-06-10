@@ -40,8 +40,8 @@ services:
         volumes:
             - wordpress-volume:/var/www/html
 
-    volumes:
-    	wordpress-volume:
+volumes:
+    wordpress-volume:
         # Indicates Docker that it should create the volume's path locally.
         #driver: local
         #wordpress-volume:
