@@ -18,7 +18,7 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 # Copies our system's indicated files into our image.
 # This will setup the configuration for our NGINX when we run
 # the container.
-COPY files/default.conf /etc/nginx/conf.d/default.conf
+COPY files/default.conf /etc/nginx/conf.d/
 #COPY files/index.html /usr/share/nginx/html/index.html
 
 # Substitute the environment variables for the correct ones.
