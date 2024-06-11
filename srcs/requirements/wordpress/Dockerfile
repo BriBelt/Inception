@@ -28,6 +28,9 @@ RUN wget -q -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds
     chmod +x /usr/local/bin/wp
 
 COPY ./files/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+
+RUN wp core download --allow-root
+
 COPY ./files/wp-config.php /var/html/wp-content/wp-config.php
 
 # Expose PHP-FPM port
