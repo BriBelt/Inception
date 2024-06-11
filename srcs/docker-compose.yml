@@ -40,6 +40,7 @@ services:
         volumes:
             - wordpress-volume:/var/www/html
             - ./requirements/wordpress/files/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
+            - ./requirements/wordpress/files/wp-config.php:/var/wp-content/wp-config.php
 
 volumes:
     wordpress-volume:
